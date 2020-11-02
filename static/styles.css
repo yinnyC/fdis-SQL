@@ -1,0 +1,16 @@
+* {
+  font-family: 'Roboto', sans-serif;
+  background-color: #E3D8C8;
+  color: #615A4A;
+}
+
+.rsvp-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.rsvp-list li {
+  text-decoration: none;
+}

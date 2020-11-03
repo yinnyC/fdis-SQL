@@ -1,5 +1,5 @@
-# week-1-rookie-halloween-party
+# Week 3:
 
-### This week, we're going to learn how to build a basic Flask application and use Jinja!
+### This week, we're learning about APIs!
 
-Follow the #TODOs, and finish your app!
+Check out the assignment [here](https://github.com/flask-django-independent-study/rookie/blob/master/Assignments/Week-3-APIs.md) for instructions!

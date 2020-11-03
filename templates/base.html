@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Weather App</title>
-        <link rel="stylesheet" href="/static/style.css">
+        <title>Relevant Holidays</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
         <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
         {% block head %}
         {% endblock %}
@@ -15,12 +15,12 @@
           </nav>
         </header>
         <main>
-            <h1><a href="/">Weather App</a></h1>
+            <h1><a href="/">Home</a></h1>
             {% block content %}
             {% endblock %}
             <section>
                 <p>
-                    This Weather App was developed by Sid Arcidiacono © 2020.
+                    © FDIS 2020
                 </p>
             </section>
         </main>

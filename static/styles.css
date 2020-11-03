@@ -4,6 +4,11 @@
   color: #615A4A;
 }
 
+img {
+  width: 50vw;
+  height: auto;
+}
+
 .rsvp-list {
   display: flex;
   flex-direction: column;

@@ -8,6 +8,7 @@ every function & class to explain what the code does.
 """
 from flask import Flask, request, render_template, url_for
 from guest import Guest
+from datetime import datetime, date
 
 app = Flask(__name__)
 
@@ -27,6 +28,7 @@ def about_page():
     """Show user party information."""
     # Sometimes, a cleaner way to pass variables to templates is to create a
     # context dictionary, and then pass the data in by dictionary key
+
     context = {
         "date": "10/31/2020",
         "time": "10:00 pm"

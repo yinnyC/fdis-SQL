@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 
+
+{% block content %}
+
 <section>
   <h3>Fall Events Details</h3>
-  <p>The party is on {{ date }} at {{ time }}</p>
+  <ul>
+    {% for holiday in holidays %}
+      <h4><li>{{ holiday['name'] }}</li></h4>
+      <p>{{ holiday['date'] }}</p>
+      <p>{{ holiday['description'] }}</p>
+    {% endfor %}
+  </ul>
 </section>
+
+{% endblock %}

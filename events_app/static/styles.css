@@ -47,6 +47,14 @@ p {
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:hover h4:hover {
+  color: #fff;
+}
+
 .rsvp-list {
   display: flex;
   flex-direction: column;

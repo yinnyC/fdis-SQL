@@ -19,7 +19,7 @@
   {% if events %}
   {% for event in events %}
   <div class="events">
-    <h4>{{ event.title }}</h4>
+    <a href="{{ url_for('main.rsvp_guest') }}"><h4>{{ event.title }}</h4></a>
     <p>{{ event.date.strftime('%b %d, %Y') }}</p>
     <p>{{ event.time.strftime('%H:%M') }}</p>
     <p>{{ event.description }}</p>

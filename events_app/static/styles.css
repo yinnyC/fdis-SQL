@@ -25,9 +25,26 @@ section {
   justify-content: center;
 }
 
+div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 img {
   width: 50vw;
   height: auto;
+}
+
+h4 {
+  margin: 10px;
+  padding: 0;
+}
+
+p {
+  margin: 5px;
+  padding: 0;
 }
 
 .rsvp-list {

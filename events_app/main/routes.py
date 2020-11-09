@@ -63,6 +63,7 @@ def add_event():
             description=new_event_description,
             date=new_event_date,
             time=new_event_time,
+            guests=[],
         )
 
         db.session.add(event)
@@ -137,18 +138,38 @@ def show_guests():
 
     Add guests to RSVP list if method is POST.
     """
+    events = Event.query.all()
     if request.method == "GET":
-        return render_template("guests.html")
+        return render_template("guests.html", events=events)
     elif request.method == "POST":
         name = request.form.get("name")
         email = request.form.get("email")
         plus_one = request.form.get("plus-one")
         phone = request.form.get("phone")
-        # guest_list.append(Guest(name, email, plus_one, phone))
-        return render_template("guests.html")
+        event_id = request.form.get("event_id")
+
+        event = Event.query.filter_by(id=event_id).first()
+
+        guest = Guest(
+            name=name,
+            email=email,
+            plus_one=plus_one,
+            phone=phone,
+            events_attending=[event],
+        )
+
+        event.guests.append(guest)
+
+        print(f"Event guests: {event.guests}")
+
+        db.session.add(guest)
+        db.session.commit()
+
+        return render_template("guests.html", events=events)
 
 
 @main.route("/rsvp")
 def rsvp_guest():
     """Show form for guests to RSVP for events."""
-    return render_template("rsvp.html")
+    events = Event.query.all()
+    return render_template("rsvp.html", events=events)

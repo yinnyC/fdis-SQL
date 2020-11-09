@@ -11,5 +11,5 @@ const editEventHandler = () => {
   editEventForm.style.display = 'flex'
 }
 
-startEditEvent.addEventListener ('click', editEventHandler)
 startAddEvent.addEventListener('click', addEventHandler)
+startEditEvent.addEventListener ('click', editEventHandler)

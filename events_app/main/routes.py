@@ -72,6 +72,38 @@ def add_event():
         return redirect(url_for("main.homepage"))
 
 
+@main.route("/delete-event/<event_id>", methods=["POST"])
+def delete_event(event_id):
+    """
+    Delete event.
+
+    Delete event after the date it occurs automatically.
+    """
+    event = Event.query.filter_by(id=event_id).first()
+    db.session.delete(event)
+    db.session.commit()
+    return redirect(url_for("main.homepage"))
+
+
+@main.route("/edit-event/<event_id>", methods=["POST"])
+def edit_event(event_id):
+    """Edit events."""
+    event = Event.query.filter_by(id=event_id).first()
+
+    new_event_title = request.form.get("title")
+    new_event_description = request.form.get("description")
+    new_event_date = datetime.strptime(request.form.get("date"), "%m-%d-%Y")
+    new_event_time = datetime.strptime(request.form.get("time"), "%H:%M")
+
+    event.title = new_event_title
+    event.description = new_event_description
+    event.date = new_event_date
+    event.time = new_event_time
+
+    db.session.commit()
+    return redirect(url_for("main.homepage"))
+
+
 @main.route("/holidays")
 def about_page():
     """Show user event information."""

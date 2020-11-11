@@ -43,31 +43,26 @@ def homepage():
 
     Show upcoming events to users!
     """
-    events = Event.query.all()
-    return render_template("index.html", events=events)
+    # TODO: query all events to show them to the user!
+    return render_template("index.html")
 
 
 @main.route("/add-event", methods=["POST"])
 def add_event():
     """Add event to Event table."""
+    # Notice I've wrapped this in a try except block.
+    # Dates are picky - watch your formatting!
     try:
-        new_event_title = request.form.get("title")
-        new_event_description = request.form.get("description")
-        new_event_date = datetime.strptime(
-            request.form.get("date"), "%m-%d-%Y"
-        )
-        new_event_time = datetime.strptime(request.form.get("time"), "%H:%M")
+        # TODO:
+        # Access our values from our event form
+        # and use these to instantiate our Event model
+        # Make sure we call db.session.add() on our new object!
+        # HINT: don't forget to also call db.session.commit() to commit changes
 
-        event = Event(
-            title=new_event_title,
-            description=new_event_description,
-            date=new_event_date,
-            time=new_event_time,
-            guests=[],
-        )
+        # Redirect is a built-in Flask method
+        # It's not great practice to return a new template
+        # if we don't have to
 
-        db.session.add(event)
-        db.session.commit()
         return redirect(url_for("main.homepage"))
     except ValueError:
         return redirect(url_for("main.homepage"))
@@ -80,9 +75,8 @@ def delete_event(event_id):
 
     Delete event after the date it occurs automatically.
     """
-    event = Event.query.filter_by(id=event_id).first()
-    db.session.delete(event)
-    db.session.commit()
+    # TODO: write code to delete the specific event.
+    # HINT: You'll have to run a query for the event first.
     return redirect(url_for("main.homepage"))
 
 
@@ -91,17 +85,9 @@ def edit_event(event_id):
     """Edit events."""
     event = Event.query.filter_by(id=event_id).first()
 
-    new_event_title = request.form.get("title")
-    new_event_description = request.form.get("description")
-    new_event_date = datetime.strptime(request.form.get("date"), "%m-%d-%Y")
-    new_event_time = datetime.strptime(request.form.get("time"), "%H:%M")
-
-    event.title = new_event_title
-    event.description = new_event_description
-    event.date = new_event_date
-    event.time = new_event_time
-
-    db.session.commit()
+    # TODO: access our form values and write the code
+    # HINT: You'll be updating an object - you know how to do this!
+    # Just don't forget to commit your changes :)
     return redirect(url_for("main.homepage"))
 
 
@@ -138,9 +124,13 @@ def show_guests():
 
     Add guests to RSVP list if method is POST.
     """
-    events = Event.query.all()
     if request.method == "GET":
-        return render_template("guests.html", events=events)
+        # TODO: We're not going to be able to pass guests to our
+        # template - Why do you think this is?
+        # If we want it to show up nicely, we need to access guests for
+        # each event and not the other way around. Write the query
+        # To make this happen!
+        return render_template("guests.html")
     elif request.method == "POST":
         name = request.form.get("name")
         email = request.form.get("email")
@@ -148,22 +138,8 @@ def show_guests():
         phone = request.form.get("phone")
         event_id = request.form.get("event_id")
 
-        event = Event.query.filter_by(id=event_id).first()
-
-        guest = Guest(
-            name=name,
-            email=email,
-            plus_one=plus_one,
-            phone=phone,
-            events_attending=[event],
-        )
-
-        event.guests.append(guest)
-
-        print(f"Event guests: {event.guests}")
-
-        db.session.add(guest)
-        db.session.commit()
+        # TODO: Change this code so that we're adding
+        # A guest object to our database rather than to a list.
 
         return render_template("guests.html", events=events)
 
@@ -171,5 +147,7 @@ def show_guests():
 @main.route("/rsvp")
 def rsvp_guest():
     """Show form for guests to RSVP for events."""
-    events = Event.query.all()
-    return render_template("rsvp.html", events=events)
+    # TODO: We're going to want to pass our events
+    # to our rsvp template so that we have separate RSVP forms for each
+    # event.
+    return render_template("rsvp.html")

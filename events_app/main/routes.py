@@ -5,7 +5,9 @@ from flask import Blueprint, request, render_template, redirect, url_for
 from datetime import date, datetime
 from pprint import PrettyPrinter
 from events_app.main.utils import get_holiday_data
-from events_app.models import Event, Guest
+
+# TODO: Uncomment this import statement when we're ready to use our models!
+# from events_app.models import Event, Guest
 
 # Import app and db from events_app package so that we can run app
 from events_app import app, db

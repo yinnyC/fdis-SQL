@@ -4,13 +4,13 @@ from sqlalchemy.orm import backref
 
 
 class Guest(db.Model):
-    """Class Guest represents the Guest table in our SQL database."""
+    """Create Guest model."""
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(55), nullable=False)
     email = db.Column(db.String(40), nullable=False)
     plus_one = db.Column(db.String(55), nullable=True)
-    phone = db.Column(db.String(15), nullable=False)
+    phone = db.Column(db.String(12), nullable=False)
     events_attending = db.relationship("Event", secondary="guest_event_link")
 
     def __repr__(self):
@@ -19,11 +19,11 @@ class Guest(db.Model):
 
 
 class Event(db.Model):
-    """Class Event represents the Event table in our SQL database."""
+    """Create Event model."""
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(90), nullable=False)
-    description = db.Column(db.String(140), nullable=True)
+    description = db.Column(db.String(140), nullable=False)
     date = db.Column(db.DateTime, nullable=False)
     time = db.Column(db.DateTime, nullable=False)
     guests = db.relationship("Guest", secondary="guest_event_link")

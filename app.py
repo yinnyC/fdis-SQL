@@ -6,7 +6,7 @@ This is a doc string! It's a special kind of comment that is expected
 in Python files. Usually, you use this at the top of your code and in
 every function & class to explain what the code does.
 """
-from events_app import app
+from events_app import app, db
 
 if __name__ == "__main__":
     with app.app_context():

@@ -6,8 +6,7 @@ from datetime import date, datetime
 from pprint import PrettyPrinter
 from events_app.main.utils import get_holiday_data
 
-# TODO: Uncomment this import statement when we're ready to use our models!
-# from events_app.models import Event, Guest
+from events_app.models import Event, Guest
 
 # Import app and db from events_app package so that we can run app
 from events_app import app, db
@@ -45,8 +44,8 @@ def homepage():
 
     Show upcoming events to users!
     """
-    # TODO: query all events to show them to the user!
-    return render_template("index.html")
+    event = Event.query.all()
+    return render_template("index.html", event=event)
 
 
 @main.route("/add-event", methods=["POST"])
@@ -61,10 +60,15 @@ def add_event():
         # Make sure we call db.session.add() on our new object!
         # HINT: don't forget to also call db.session.commit() to commit changes
 
-        # Redirect is a built-in Flask method
-        # It's not great practice to return a new template
-        # if we don't have to
+        title = request.form.get('title')
+        description = request.form.get('description')
+        date = request.form.get('date')
+        time = request.form.get('time')
 
+        event = Event(title=title, description=description,
+                      date=date, time=time)
+        db.session.add(guest)
+        db.session.commit()
         return redirect(url_for("main.homepage"))
     except ValueError:
         return redirect(url_for("main.homepage"))
